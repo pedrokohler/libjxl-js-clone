@@ -10,8 +10,11 @@ function decode(decoder, encodedBitStream, iterations=1) {
     }
 
     const decodeDuration = process.hrtime(beginDecode); // hrtime returns seconds/nanoseconds tuple
+    console.log("decodeDuration=", decodeDuration);
     const decodeDurationInSeconds = (decodeDuration[0] + (decodeDuration[1] / 1000000000));
+    console.log("decodeDurationInSections", decodeDurationInSeconds, decodeDuration[0], decodeDuration[1], iterations);
     const decodeTimeMS = ((decodeDurationInSeconds / iterations * 1000))
+    console.log("decodeTimeMS", decodeTimeMS);
     const frameInfo = decoder.getFrameInfo()
     const pixels = decoder.getDecodedBuffer()
 
