@@ -1,7 +1,9 @@
 function decode(decoder, encodedBitStream, iterations=1) {
-    const encodedBuffer = decoder.getEncodedBuffer(encodedBitStream.length)
+  const encodedBuffer = decoder.getEncodedBuffer(encodedBitStream.length)
+  console.log("🚀 ~ decode ~ encodedBitStream:", encodedBitStream)
+    console.log("🚀 ~ decode ~ encodedBuffer:", encodedBuffer)
     encodedBuffer.set(encodedBitStream)
-  
+
     const beginDecode = process.hrtime();
     for(let i=0; i < iterations; i++) {
       decoder.decode()
@@ -12,7 +14,7 @@ function decode(decoder, encodedBitStream, iterations=1) {
     const decodeTimeMS = ((decodeDurationInSeconds / iterations * 1000))
     const frameInfo = decoder.getFrameInfo()
     const pixels = decoder.getDecodedBuffer()
-  
+
     return {
       frameInfo,
       pixels,
@@ -22,6 +24,8 @@ function decode(decoder, encodedBitStream, iterations=1) {
 
 function encode(encoder, uncompressedImageFrame, imageFrame, iterations = 1) {
   const decodedBytes = encoder.getDecodedBuffer(imageFrame);
+  console.log("🚀 ~ encode ~ imageFrame:", imageFrame)
+  console.log("🚀 ~ encode ~ decodedBytes:", decodedBytes)
   decodedBytes.set(uncompressedImageFrame);
 
   const encodeBegin = process.hrtime();
