@@ -4,7 +4,7 @@
 #-------------------------------------------------------------------------------------------------------------
 
 #FROM mcr.microsoft.com/vscode/devcontainers/base:0-debian-9
-FROM emscripten/emsdk:2.0.31
+FROM emscripten/emsdk:3.1.47-arm64
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive

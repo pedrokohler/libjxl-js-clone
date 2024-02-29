@@ -26,7 +26,11 @@ function encodeFile(codec, imageName, imageFrame, iterations = 1) {
 }
 
 function main(codec) {
-  const iterations = (process.argv.length > 2) ? parseInt(process.argv[2]) : 1
+  const iterations =
+    process.argv.length < 2 || isNaN(parseInt(process.argv[2]))
+      ? 1
+      : parseInt(process.argv[2]);
+
   encodeFile(codec, 'CT1', {width: 512, height: 512, bitsPerSample: 16, componentCount: 1, isSigned: true}, iterations)
   encodeFile(codec, 'CT2', {width: 512, height: 512, bitsPerSample: 16, componentCount: 1, isSigned: true}, iterations);
   encodeFile(codec, 'MG1', {width: 3064, height: 4774, bitsPerSample: 16, componentCount: 1, isSigned: false}, iterations);

@@ -1,4 +1,4 @@
-FROM emscripten/emsdk:2.0.31
+FROM emscripten/emsdk:3.1.47-arm64
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
@@ -9,9 +9,9 @@ ARG USERNAME=dev
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-# delete emscripten user and create user with sudo privelege that matches current user    
+# delete emscripten user and create user with sudo privelege that matches current user
 RUN userdel emscripten \
-    && groupadd -g $USER_GID $USERNAME \
+    # && groupadd -g $USER_GID $USERNAME \
     && useradd -ms /bin/bash -u $USER_UID -g $USER_GID $USERNAME \
     && usermod -aG sudo $USERNAME \
     && printf "\n$USERNAME ALL=(ALL) NOPASSWD: ALL\n" >> /etc/sudoers
@@ -19,7 +19,7 @@ RUN userdel emscripten \
 # Configure apt and install packages
 RUN apt-get update \
     #
-    # Install nvm 
+    # Install nvm
     && su - $USERNAME -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash" \
     #
     # Install C++ tools
